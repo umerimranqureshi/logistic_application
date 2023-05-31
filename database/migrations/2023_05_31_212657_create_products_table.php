@@ -13,7 +13,14 @@ return new class extends Migration
     {
         Schema::create('products', function (Blueprint $table) {
             $table->id();
+            $table->string('name');
+            $table->decimal('price', 8, 2);
+            $table->unsignedBigInteger('supplier_id');
+            $table->unsignedBigInteger('warehouse_id');
             $table->timestamps();
+
+            $table->foreign('supplier_id')->references('id')->on('suppliers');
+            $table->foreign('warehouse_id')->references('id')->on('warehouses');
         });
     }
 

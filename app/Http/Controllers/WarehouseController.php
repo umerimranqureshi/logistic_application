@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Warehouse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class WarehouseController extends Controller
 {
@@ -12,7 +13,8 @@ class WarehouseController extends Controller
      */
     public function index()
     {
-        //
+        $warehouses = Warehouse::all();
+        return response()->json($warehouses);
     }
 
     /**
@@ -28,7 +30,17 @@ class WarehouseController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validator = Validator::make($request->all(), [
+            'supplier_id' => 'required|exists:suppliers,id',
+            'address' => 'required|string',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json($validator->errors(), 400);
+        }
+
+        $warehouse = Warehouse::create($request->all());
+        return response()->json($warehouse, 201);
     }
 
     /**
@@ -36,7 +48,7 @@ class WarehouseController extends Controller
      */
     public function show(Warehouse $warehouse)
     {
-        //
+        return response()->json($warehouse);
     }
 
     /**
@@ -52,7 +64,17 @@ class WarehouseController extends Controller
      */
     public function update(Request $request, Warehouse $warehouse)
     {
-        //
+        $validator = Validator::make($request->all(), [
+            'supplier_id' => 'exists:suppliers,id',
+            'address' => 'string',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json($validator->errors(), 400);
+        }
+
+        $warehouse->update($request->all());
+        return response()->json($warehouse);
     }
 
     /**
@@ -60,6 +82,7 @@ class WarehouseController extends Controller
      */
     public function destroy(Warehouse $warehouse)
     {
-        //
+        $warehouse->delete();
+        return response()->json(null, 204);
     }
 }
