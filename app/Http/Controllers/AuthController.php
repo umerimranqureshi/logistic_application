@@ -10,6 +10,9 @@ use Illuminate\Validation\ValidationException;
 
 class AuthController extends Controller
 {
+    /**
+     * Register user here
+     **/
     public function register(Request $request)
     {
         $request->validate([
@@ -31,7 +34,9 @@ class AuthController extends Controller
             'token_type' => 'Bearer',
         ]);
     }
-
+    /**
+     * Login user here
+     **/
     public function login(Request $request)
     {
         $request->validate([

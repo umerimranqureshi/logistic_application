@@ -31,27 +31,10 @@ Route::post('/login', [AuthController::class, 'login']);
 Route::middleware(['auth:api'])->group(function () {
     // Products
     Route::resource('products',ProductController::class);
-    // Route::get('/products', [ProductController::class, 'index']);
-    // Route::post('/products', [ProductController::class, 'store']);
-    // Route::get('/products/{product}', [ProductController::class, 'show']);
-    // Route::put('/products/{product}', [ProductController::class, 'update']);
-    // Route::delete('/products/{product}', [ProductController::class, 'destroy']);
-
+   
     // Suppliers
     Route::resource('suppliers',SupplierController::class);
 
-    // Route::get('/suppliers', [SupplierController::class, 'index']);
-    // Route::post('/suppliers', [SupplierController::class, 'store']);
-    // Route::get('/suppliers/{supplier}', [SupplierController::class, 'show']);
-    // Route::put('/suppliers/{supplier}', [SupplierController::class, 'update']);
-    // Route::delete('/suppliers/{supplier}', [SupplierController::class, 'destroy']);
-
     // Warehouses
     Route::resource('warehouses',WarehouseController::class);
-
-    // Route::get('/warehouses', [WarehouseController::class, 'index']);
-    // Route::post('/warehouses', [WarehouseController::class, 'store']);
-    // Route::get('/warehouses/{warehouse}', [WarehouseController::class, 'show']);
-    // Route::put('/warehouses/{warehouse}', [WarehouseController::class, 'update']);
-    // Route::delete('/warehouses/{warehouse}', [WarehouseController::class, 'destroy']);
 });
